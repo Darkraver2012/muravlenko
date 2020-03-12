@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/organisations.css">
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="stylesheet" href="css/footer.css">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+	<title>E-Zанятость | Учреждения</title>
+</head>
+<body>	
+	<div class="wrapper">
+		<?php include 'includes/header.php'; ?>
+		<main>
+			<section class="organisations section-padding-both">
+				<div class="container">
+					<h2>Учреждения</h2>
+					<div class="card-deck">
+						<?php
+							include ('db.php');
+							$result = mysqli_query($conn, "SELECT * FROM organisations");
+							while($row=mysqli_fetch_array($result))
+							{
+						?>
+								<div class="card">
+									<div class="card-img">
+										<img src="img/organisations/<?php echo $row['img'] ?>">
+									</div>
+									<div class="card-body">
+										<h5><a href="organisation.php?id=<?php echo $row['id'] ?>" class="link-secondary"><?php echo $row['name'] ?></a></h5>
+									</div>
+								</div>
+						<?php
+							}
+							mysqli_close($conn);
+						?>
+					</div>
+				</div>
+			</section>
+		</main>
+		<?php include 'includes/footer.php'; ?>
+	</div>
+</body>
+</html>
